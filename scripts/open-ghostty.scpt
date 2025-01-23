@@ -2,7 +2,10 @@ on run argv
 	set prevDelimiter to AppleScript's text item delimiters
 	
 	set AppleScript's text item delimiters to " "
-	set commands to argv as string
+	set commands to ""
+	repeat with arg in argv
+		set commands to commands & arg & " "
+	end repeat
 	set AppleScript's text item delimiters to prevDelimiter
 	
 	tell application "Ghostty"

@@ -1,6 +1,6 @@
 {
   "name": "vscode-open-ghostty",
-  "displayName": "vscode-open-ghostty",
+  "displayName": "Open with Ghostty",
   "description": "Open Ghostty in vscode.",
   "version": "0.0.1",
   "engines": {
@@ -14,10 +14,32 @@
   "contributes": {
     "commands": [
       {
-        "command": "vscode-open-ghostty.helloWorld",
-        "title": "Hello World"
+        "command": "extension.openGhostty",
+        "title": "Open Ghostty Here"
       }
-    ]
+    ],
+    "menus": {
+      "explorer/context": [
+        {
+          "command": "extension.openGhostty"
+        }
+      ],
+      "editor/context": [
+        {
+          "command": "extension.openGhostty"
+        }
+      ],
+      "editor/title": [
+        {
+          "command": "extension.openGhostty"
+        }
+      ],
+      "editor/title/context": [
+        {
+          "command": "extension.openGhostty"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run package",
@@ -31,17 +53,24 @@
     "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/vscode": "^1.96.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "20.x",
+    "@types/vscode": "^1.96.0",
     "@typescript-eslint/eslint-plugin": "^8.17.0",
     "@typescript-eslint/parser": "^8.17.0",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1",
     "eslint": "^9.16.0",
-    "typescript": "^5.7.2",
     "ts-loader": "^9.5.1",
+    "typescript": "^5.7.2",
     "webpack": "^5.95.0",
     "webpack-cli": "^5.1.4",
-    "@vscode/test-cli": "^0.0.10",
-    "@vscode/test-electron": "^2.4.1"
-  }
+    "prettier": "^3.4.2"
+  },
+  "keywords": [
+    "Ghostty",
+    "ghostty",
+    "terminal"
+  ],
+  "icon": "images/icon.png"
 }
