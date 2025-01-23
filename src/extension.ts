@@ -1,5 +1,5 @@
 'use strict';
-import { spawn } from 'child_process';
+import { exec } from 'child_process';
 import * as path from 'path';
 import * as fs from 'fs';
 import * as vscode from 'vscode';
@@ -7,13 +7,11 @@ import * as vscode from 'vscode';
 export function activate(context: vscode.ExtensionContext) {
   let disposable = vscode.commands.registerCommand('extension.openGhostty', (e: vscode.Uri) => {
     if (process.platform === 'darwin') {
-      const scriptPath = path.join(__dirname, '../../scripts/open-ghostty.scpt');
-
       console.log(e);
       fs.stat(e.fsPath, (err, stats) => {
         if (err) {
-			return;
-		}
+          return;
+        }
 
         let dirPath = e.fsPath;
         if (stats.isFile()) {
@@ -21,7 +19,14 @@ export function activate(context: vscode.ExtensionContext) {
         }
 
         console.log(dirPath);
-        let childProcess = spawn('osascript', [scriptPath, 'cd', `"${dirPath}"`]);
+        exec(`open -a Ghostty ${dirPath}`, (error, stdout, stderr) => {
+          if (error) {
+            console.error(`执行出错: ${error}`);
+            return;
+          }
+          console.log(`stdout: ${stdout}`);
+          console.error(`stderr: ${stderr}`);
+        });
       });
     } else {
       vscode.commands.executeCommand('workbench.action.terminal.openNativeConsole', e);
